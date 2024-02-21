@@ -45,3 +45,5 @@ if search_clicked:
         st.write("No matching records found.")
 elif clear_clicked:
     st.table([])  # Clear the table
+
+
