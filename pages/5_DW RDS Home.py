@@ -2,7 +2,7 @@
 
 import streamlit as st
 import os
-from doc import Document
+from docx import Document
 
 # Set page title
 st.set_page_config(page_title="DW RDS Home",layout="wide")
