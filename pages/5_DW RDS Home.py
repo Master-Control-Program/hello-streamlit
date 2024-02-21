@@ -9,7 +9,7 @@ st.set_page_config(page_title="DW RDS Home",layout="wide")
 st.write("This page/section was linked to a word document that is listed below.")
 
 # Upload the file
-uploaded_file = st.sidebar.file_uploader("Upload a Word document", type=["docx"])
+uploaded_file = st.sidebar.file_uploader("Upload a Word document", type=["doc"])
 
 # If a file was uploaded
 if uploaded_file is not None:
@@ -20,3 +20,4 @@ if uploaded_file is not None:
     # Create a download link for the file
     download_link = f'<a href="tempDir/{uploaded_file.name}" download>Click here to download</a>'
     st.markdown(download_link, unsafe_allow_html=True)
+
