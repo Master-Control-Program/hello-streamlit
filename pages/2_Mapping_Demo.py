@@ -38,6 +38,10 @@ clear_clicked = st.button("Clear")
 # Display table based on search criteria
 if search_clicked:
     filtered_data = filter_data(category_code, description, line_of_business)
-    st.table(filtered_data)
+    if filtered_data:
+        df = pd.DataFrame(filtered_data)
+        st.table(df)
+    else:
+        st.write("No matching records found.")
 elif clear_clicked:
     st.table([])  # Clear the table
