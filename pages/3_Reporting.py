@@ -1,51 +1,37 @@
 import streamlit as st
 import pandas as pd
 
-# Set page config to use wide mode and dark theme
-st.set_page_config(layout="wide")
+# Title of the page
+st.title("Plan Codes by Product")
+
+# Note on the page
+st.write("This previously was 'reporting' but the reports were outdated and most likely not being used. Thinking about pivoting to Plan Codes by Product search page.")
+
+# Search Criteria Section
+st.sidebar.title("Search Criteria")
+
+# Dropdown for Line of Business (LOB)
+lob_options = ["Option 1", "Option 2", "Option 3"]
+selected_lob = st.sidebar.selectbox("Select Line of Business (LOB):", lob_options)
+
+# Dropdown for Product
+product_options = ["Product 1", "Product 2", "Product 3"]
+selected_product = st.sidebar.selectbox("Select Product:", product_options)
+
+# Text box for inputting Plan Code
+plan_code = st.sidebar.text_input("Enter Plan Code:")
 
 # Dummy data for the table
-dummy_data = [
-    {"Product Category Code": "PC001", "Description": "Electronics", "Line of Business Name": "Consumer Goods"},
-    {"Product Category Code": "PC002", "Description": "Clothing", "Line of Business Name": "Fashion"},
-    {"Product Category Code": "PC003", "Description": "Food", "Line of Business Name": "Groceries"},
-]
+data = {
+    "Plan Code": ["Plan1", "Plan2", "Plan3"],
+    "Product": ["Product 1", "Product 2", "Product 3"],
+    "LOB": ["Option 1", "Option 2", "Option 3"],
+}
+df = pd.DataFrame(data)
 
-# Convert dummy data to DataFrame
-df_dummy = pd.DataFrame(dummy_data)
+# Filter data based on search criteria
+filtered_df = df[(df["LOB"] == selected_lob) & (df["Product"] == selected_product) & (df["Plan Code"].str.contains(plan_code, case=False))]
 
-# Function to filter data based on search criteria
-def filter_data(category_code, description, line_of_business):
-    filtered_data = df_dummy[
-        df_dummy["Product Category Code"].str.lower().str.contains(category_code.lower()) &
-        df_dummy["Description"].str.lower().str.contains(description.lower()) &
-        df_dummy["Line of Business Name"].str.lower().str.contains(line_of_business.lower())
-    ]
-    return filtered_data
-
-# Streamlit app layout
-st.title("Product Categories")
-
-# Search criteria section
-st.header("Search Criteria")
-col1, col2, col3 = st.columns(3)
-with col1:
-    category_code = st.text_input("Product Category Code", "")
-with col2:
-    description = st.text_input("Description", "")
-with col3:
-    line_of_business = st.text_input("Line of Business Name", "")
-
-# Buttons for search and clear
-search_clicked = st.button("Search")
-clear_clicked = st.button("Clear")
-
-# Display table based on search criteria or show the dummy data
-if search_clicked:
-    filtered_data = filter_data(category_code, description, line_of_business)
-    st.table(filtered_data)
-elif clear_clicked:
-    category_code, description, line_of_business = "", "", ""
-    st.table(df_dummy)
-else:
-    st.table(df_dummy)
+# Display the filtered table
+st.write("Search Results:")
+st.table(filtered_df)
