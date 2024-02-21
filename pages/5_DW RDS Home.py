@@ -3,11 +3,8 @@
 import streamlit as st
 import os
 
-# Set page config to use wide mode and dark theme
-st.set_page_config(layout="wide")
-
 # Set page title
-st.set_page_config(page_title="DW RDS Home")
+st.set_page_config(page_title="DW RDS Home",layout="wide")
 
 st.write("This page/section was linked to a word document that is listed below.")
 
