@@ -8,24 +8,24 @@ st.title("Plan Codes by Product")
 st.write("This previously was 'reporting' but the reports were outdated and most likely not being used. Thinking about pivoting to Plan Codes by Product search page.")
 
 # Search Criteria Section
-st.sidebar.title("Search Criteria")
+st.header("Search Criteria")
 
 # Dropdown for Line of Business (LOB)
 lob_options = ["Option 1", "Option 2", "Option 3"]
-selected_lob = st.sidebar.selectbox("Select Line of Business (LOB):", lob_options)
+selected_lob = st.selectbox("Select Line of Business (LOB):", lob_options)
 
 # Dropdown for Product
 product_options = ["Product 1", "Product 2", "Product 3"]
-selected_product = st.sidebar.selectbox("Select Product:", product_options)
+selected_product = st.selectbox("Select Product:", product_options)
 
 # Text box for inputting Plan Code
-plan_code = st.sidebar.text_input("Enter Plan Code:")
+plan_code = st.text_input("Enter Plan Code:")
 
 # Dummy data for the table
 data = {
-    "Plan Code": ["Plan1", "Plan2", "Plan3"],
-    "Product": ["Product 1", "Product 2", "Product 3"],
-    "LOB": ["Option 1", "Option 2", "Option 3"],
+    "Plan Code": ["Plan1", "Plan2", "Plan3", "Plan4", "Plan5", "Plan6"],
+    "Product": ["Product 1", "Product 2", "Product 3", "Product 1", "Product 2", "Product 3"],
+    "LOB": ["Option 1", "Option 2", "Option 3", "Option 1", "Option 2", "Option 3"],
 }
 df = pd.DataFrame(data)
 
