@@ -13,7 +13,7 @@ st.write("This page/section was linked to a word document that is listed below."
 
 
 # Path to the .doc file
-file_path = r'C:\Users\bradm\Documents\GitHub\hello-streamlit\.documents\RDS_TMApp_User_Manual.doc'
+file_path = r'C:\Users\bradm\Documents\GitHub\hello-streamlit\.documents\RDS_TMApp_User_Manual.docx'
 
 # Load the document
 doc = Document(file_path)
