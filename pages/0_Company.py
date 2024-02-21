@@ -15,6 +15,9 @@
 
 import streamlit as st
 
+# Set page config to use wide mode and dark theme
+st.set_page_config(layout="wide")
+
 # Set the page title
 st.set_page_config(page_title="System Ref")
 
