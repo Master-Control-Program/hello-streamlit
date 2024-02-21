@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 
+# Set page config to use wide mode and dark theme
+st.set_page_config(layout="wide", theme="dark")
+
 # Dummy data for the table
 dummy_data = [
     {"Product Category Code": "PC001", "Description": "Electronics", "Line of Business Name": "Consumer Goods"},
