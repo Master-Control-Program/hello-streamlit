@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 
+# Set page config to use wide mode and dark theme
+st.set_page_config(layout="wide")
+
 # Set page title
 st.set_page_config(page_title="Region")
 
