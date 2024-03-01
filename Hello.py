@@ -15,6 +15,9 @@
 import streamlit as st
 import sqlite3
 
+# Set page config to use wide mode and dark theme
+st.set_page_config(layout="wide")
+
 st.sidebar.title("Home")
 
 
