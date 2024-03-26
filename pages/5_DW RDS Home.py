@@ -46,7 +46,7 @@ clear_button = st.button("Clear")
 # Display the contents of a table from the SQLite database
 st.header("Database Table")
 cur = conn.cursor()
-cur.execute("SELECT * FROM your_table_name")  # Replace 'your_table_name' with the actual table name
+cur.execute("SELECT * FROM coverage_table")  # Replace 'your_table_name' with the actual table name
 rows = cur.fetchall()
 st.table(rows)
 
