@@ -1,30 +1,25 @@
 import streamlit as st
+import sqlite3
 
-st.write("Placeholder but this page probably won't be needed.")
+# Set page config to use wide mode and dark theme
+st.set_page_config(layout="wide")
 
-import pyodbc
+# Define the path to the database file
+db_path = r"C:\Users\bradm\Documents\GitHub\hello-streamlit\databases\temp_plancode_database.db"
 
-# Define the connection string
-conn_str = 'DRIVER={ODBC Driver 18 for SQL Server};' \
-           'SERVER=NTLPS8P11;' \
-           'DATABASE=LP_CIKPROD;' \
-           'Trusted_Connection=yes;' \
-           'TrustServerCertificate=yes;'  # Trust the server's SSL certificate
+# Connect to the database
+conn = sqlite3.connect(db_path)
 
-# Establish a connection
-conn = pyodbc.connect(conn_str)
+# Query the database and display the results
+cur = conn.cursor()
+cur.execute("SELECT * FROM coverage_table")  # Replace 'your_table_name' with the actual table name
+rows = cur.fetchall()
 
-# Create a cursor
-cursor = conn.cursor()
+# Get column headers
+column_headers = [description[0] for description in cur.description]
 
-# Execute a query to fetch data (selecting the first 10 rows)
-cursor.execute('SELECT * FROM CACSE FETCH FIRST 10 ROWS ONLY')
+# Display the first 5 rows of the table with column headers
+st.table([column_headers] + rows[:5])
 
-
-# Fetch and print the results
-for row in cursor.fetchall():
-    print(row)
-
-# Close the cursor and connection
-cursor.close()
+# Close the database connection
 conn.close()

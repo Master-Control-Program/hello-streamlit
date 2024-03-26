@@ -14,7 +14,12 @@ conn = sqlite3.connect(db_path)
 cur = conn.cursor()
 cur.execute("SELECT * FROM coverage_table")  # Replace 'your_table_name' with the actual table name
 rows = cur.fetchall()
-st.table(rows)
+
+# Get column headers
+column_headers = [description[0] for description in cur.description]
+
+# Display the first 5 rows of the table with column headers
+st.table([column_headers] + rows[:5])
 
 # Close the database connection
 conn.close()
