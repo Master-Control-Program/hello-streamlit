@@ -1,8 +1,5 @@
-import streamlit as st
 import sqlite3
-
-# Set page config to use wide mode and dark theme
-st.set_page_config(layout="wide")
+from prettytable import PrettyTable
 
 # Define the path to the database file
 db_path = r"C:\Users\bradm\Documents\GitHub\hello-streamlit\databases\temp_plancode_database.db"
@@ -18,8 +15,16 @@ rows = cur.fetchall()
 # Get column headers
 column_headers = [description[0] for description in cur.description]
 
-# Display the first 5 rows of the table with column headers
-st.table([column_headers] + rows[:5])
+# Create a PrettyTable instance and set the column headers
+table = PrettyTable()
+table.field_names = column_headers
+
+# Add the first 5 rows to the table
+for row in rows[:5]:
+    table.add_row(row)
+
+# Print the table
+print(table)
 
 # Close the database connection
 conn.close()
