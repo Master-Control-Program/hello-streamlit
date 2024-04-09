@@ -1,30 +1,34 @@
 import streamlit as st
+import sqlite3
+import requests
 
-st.write("Placeholder but this page probably won't be needed.")
+# Set page config to use wide mode
+st.set_page_config(layout="wide")
 
-import pyodbc
+# URL of the SQLite database file in the GitHub repository
+db_url = "https://github.com/Master-Control-Program/hello-streamlit/blob/main/databases/temp_plancode_database.db"
 
-# Define the connection string
-conn_str = 'DRIVER={ODBC Driver 18 for SQL Server};' \
-           'SERVER=NTLPS8P11;' \
-           'DATABASE=LP_CIKPROD;' \
-           'Trusted_Connection=yes;' \
-           'TrustServerCertificate=yes;'  # Trust the server's SSL certificate
+# Path to save the downloaded database file
+db_path = "temp_plancode_database.db"
 
-# Establish a connection
-conn = pyodbc.connect(conn_str)
+# Download the database file
+response = requests.get(db_url)
+with open(db_path, "wb") as file:
+    file.write(response.content)
 
-# Create a cursor
-cursor = conn.cursor()
+# Connect to the downloaded database
+conn = sqlite3.connect(db_path)
 
-# Execute a query to fetch data (selecting the first 10 rows)
-cursor.execute('SELECT * FROM CACSE FETCH FIRST 10 ROWS ONLY')
+# Query the database and display the results
+cur = conn.cursor()
+cur.execute("SELECT * FROM coverage_table LIMIT 5")  # Retrieve the first 5 rows
+rows = cur.fetchall()
 
+# Get column headers
+column_headers = [description[0] for description in cur.description]
 
-# Fetch and print the results
-for row in cursor.fetchall():
-    print(row)
+# Display the table with column headers
+st.table([column_headers] + rows)
 
-# Close the cursor and connection
-cursor.close()
+# Close the database connection
 conn.close()
